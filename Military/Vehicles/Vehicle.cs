@@ -1,4 +1,6 @@
-﻿namespace Military.Vehicles
+﻿using System;
+
+namespace Military.Vehicles
 {
     public abstract class Vehicle
     {
@@ -21,5 +23,6 @@
         {
             return $"{Id} | {Weight}kg | {AvgSpeed}km/h | {FuelConsumption} L/100km| {Capacity} People";
         }
+
     }
 }

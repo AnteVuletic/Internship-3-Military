@@ -12,9 +12,12 @@ namespace Military
     {
         public static void Main(string[] args)
         {
-            var someAmphibia = new Amphibia(5000,30);
-            someAmphibia.StartNewTrip(60,50,20);
+            var someAmphibia = new Amphibia(5000,20);
+            someAmphibia.StartNewTrip(60,50,5);
             Console.WriteLine(someAmphibia.ToString());
+            var someTank = new Tank(4000,50);
+            someTank.StartNewTrip(110,5);
+            Console.WriteLine(someTank.ToString());
         }
     }
 }

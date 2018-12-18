@@ -2,6 +2,7 @@
 {
     public class Warship : Vehicle,ISwimmable
     {
+        public double TripDistanceTraveled { get; set; }
         public Warship(int weight, double avgSpeed) : base(weight,HelperClasses.FuelConsumption.Warship, HelperClasses.Capacity.Warship, avgSpeed)
         {
 
@@ -11,9 +12,14 @@
             return base.ToString();
         }
 
-        public int Swim(int distance)
+        public void Swim(int distance)
         {
-            return 2;
+            for (var tenMinuteIterator = 0; tenMinuteIterator < (distance / 3); tenMinuteIterator++)
+            {
+                if (HelperClasses.FuelConsumption.FiftyPercentFailChance())
+                    distance += 3;
+                TripDistanceTraveled += 3;
+            }
         }
     }
 }

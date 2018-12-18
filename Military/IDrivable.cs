@@ -2,6 +2,7 @@
 {
     public interface IDrivable
     {
-        int Move(int distance);
+        double TripDistanceTraveled { get; set; }
+        void Move(int distance);
     }
 }

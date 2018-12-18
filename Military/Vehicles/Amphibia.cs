@@ -4,7 +4,7 @@ namespace Military.Vehicles
 {
     public class Amphibia : Vehicle, IDrivable,ISwimmable
     {
-        public int TripDistanceTraveled { get; private set; }
+        public double TripDistanceTraveled { get; set; }
 
         public Amphibia(int weight, double avgSpeed) : base(weight, HelperClasses.FuelConsumption.Amphibia,HelperClasses.Capacity.Amphibia, avgSpeed)
         {
@@ -12,39 +12,38 @@ namespace Military.Vehicles
 
         public override string ToString()
         {
-            return base.ToString() + $"| {FuelConsumed()} liters";
+            return base.ToString() + $"| {FuelConsumed()} L";
         }
 
-        public int Move(int distance)
+        public void Move(int distance)
         {
-            var realDistance = 0;
             for (var tenKmIterator = 0; tenKmIterator < (distance/10); tenKmIterator++)
             {
                 if (HelperClasses.FuelConsumption.ThirtyPercentFailChance())
                     distance += 5;
-                realDistance += 10;
+                TripDistanceTraveled += 10;
             }
-            return realDistance;
+
+            TripDistanceTraveled += distance % 10;
         }
-        public int Swim(int distance)
+        public void Swim(int distance)
         {
-            var realDistance = 0.0;
             for (var tenMinuteIterator = 0; tenMinuteIterator < (distance / TenMinuteDistanceTraveled()); tenMinuteIterator++)
             {
                 if (HelperClasses.FuelConsumption.FiftyPercentFailChance())
                     distance += 3;
-                realDistance += TenMinuteDistanceTraveled();
+                TripDistanceTraveled += TenMinuteDistanceTraveled();
             }
-            return (int)realDistance;
+            TripDistanceTraveled += distance % TenMinuteDistanceTraveled();
         }
 
         public double FuelConsumed()
         {
-            return TripDistanceTraveled * (100/HelperClasses.FuelConsumption.Amphibia);
+            return (int)(TripDistanceTraveled * ((double)100/HelperClasses.FuelConsumption.Amphibia));
         }
         public int GetNumberOfTrips(int numPassengers)
         {
-            if (numPassengers == HelperClasses.Capacity.Amphibia)
+            if (numPassengers <= HelperClasses.Capacity.Amphibia)
                 return 1;
             return 2 * (numPassengers / HelperClasses.Capacity.Amphibia) + 1;
         }
@@ -58,8 +57,8 @@ namespace Military.Vehicles
             TripDistanceTraveled = 0;
             for (var tripIterator = 0; tripIterator < GetNumberOfTrips(numPassengers); tripIterator++)
             {
-                TripDistanceTraveled += Swim(distanceWater);
-                TripDistanceTraveled += Move(distanceLand);
+                Swim(distanceWater);
+                Move(distanceLand);
             }
         }
 

@@ -2,6 +2,7 @@
 {
     public interface ISwimmable
     {
-        int Swim(int distance);
+        double TripDistanceTraveled { get; set; }
+        void Swim(int distance);
     }
 }
