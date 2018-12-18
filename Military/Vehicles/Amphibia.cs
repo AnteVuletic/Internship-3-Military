@@ -5,7 +5,6 @@ namespace Military.Vehicles
     public sealed class Amphibia : Vehicle, IDrivable,ISwimmable
     {
         public double TripDistanceTraveled { get; set; }
-
         public Amphibia(int weight, double avgSpeed) : base(weight, HelperClasses.FuelConsumption.Amphibia,HelperClasses.Capacity.Amphibia, avgSpeed)
         {
         }
