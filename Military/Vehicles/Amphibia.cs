@@ -2,7 +2,7 @@
 
 namespace Military.Vehicles
 {
-    public class Amphibia : Vehicle, IDrivable,ISwimmable
+    public sealed class Amphibia : Vehicle, IDrivable,ISwimmable
     {
         public double TripDistanceTraveled { get; set; }
 
@@ -28,28 +28,17 @@ namespace Military.Vehicles
         }
         public void Swim(int distance)
         {
-            for (var tenMinuteIterator = 0; tenMinuteIterator < (distance / TenMinuteDistanceTraveled()); tenMinuteIterator++)
+            for (var tenMinuteIterator = 0; tenMinuteIterator < (distance / HelperClasses.FuelConsumption.TenMinuteDistanceTraveled(AvgSpeed)); tenMinuteIterator++)
             {
                 if (HelperClasses.FuelConsumption.FiftyPercentFailChance())
                     distance += 3;
-                TripDistanceTraveled += TenMinuteDistanceTraveled();
+                TripDistanceTraveled += HelperClasses.FuelConsumption.TenMinuteDistanceTraveled(AvgSpeed);
             }
-            TripDistanceTraveled += distance % TenMinuteDistanceTraveled();
+            TripDistanceTraveled += distance % HelperClasses.FuelConsumption.TenMinuteDistanceTraveled(AvgSpeed);
         }
-
-        public double FuelConsumed()
+        public override double FuelConsumed()
         {
-            return (int)(TripDistanceTraveled * ((double)100/HelperClasses.FuelConsumption.Amphibia));
-        }
-        public int GetNumberOfTrips(int numPassengers)
-        {
-            if (numPassengers <= HelperClasses.Capacity.Amphibia)
-                return 1;
-            return 2 * (numPassengers / HelperClasses.Capacity.Amphibia) + 1;
-        }
-        private double TenMinuteDistanceTraveled()
-        {
-            return (AvgSpeed / 60) * 10;
+            return (int)(TripDistanceTraveled * ((double)100 / HelperClasses.FuelConsumption.Amphibia));
         }
 
         public void StartNewTrip(int distanceWater,int distanceLand,int numPassengers)

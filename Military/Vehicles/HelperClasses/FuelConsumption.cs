@@ -16,5 +16,9 @@ namespace Military.Vehicles.HelperClasses
         {
             return new Random().Next(1, 100) <= 50;
         }
+        public static double TenMinuteDistanceTraveled(double avgSpeed)
+        {
+            return (avgSpeed / 60) * 10;
+        }
     }
 }

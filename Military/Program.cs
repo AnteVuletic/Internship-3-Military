@@ -13,11 +13,14 @@ namespace Military
         public static void Main(string[] args)
         {
             var someAmphibia = new Amphibia(5000,20);
-            someAmphibia.StartNewTrip(60,50,5);
+            someAmphibia.StartNewTrip(60,50,60);
             Console.WriteLine(someAmphibia.ToString());
             var someTank = new Tank(4000,50);
-            someTank.StartNewTrip(110,5);
+            someTank.StartNewTrip(190,60);
             Console.WriteLine(someTank.ToString());
+            var someWarship = new Warship(19000,30);
+            someWarship.StartNewTrip(500,60);
+            Console.WriteLine(someWarship.ToString());
         }
     }
 }

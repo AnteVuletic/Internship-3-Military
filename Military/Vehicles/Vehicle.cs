@@ -23,6 +23,13 @@ namespace Military.Vehicles
         {
             return $"{Id} | {Weight}kg | {AvgSpeed}km/h | {FuelConsumption} L/100km| {Capacity} People";
         }
+        public int GetNumberOfTrips(int numPassengers)
+        {
+            if (numPassengers <= Capacity)
+                return 1;
+            return 2 * (numPassengers / Capacity) + 1;
+        }
 
+        public abstract double FuelConsumed();
     }
 }
