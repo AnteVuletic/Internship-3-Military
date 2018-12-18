@@ -43,8 +43,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IDrivable.cs" />
+    <Compile Include="ISwimmable.cs" />
+    <Compile Include="Vehicles\Amphibia.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Vehicles\HelperClasses\Capacity.cs" />
+    <Compile Include="Vehicles\HelperClasses\FuelConsumption.cs" />
+    <Compile Include="Vehicles\Tank.cs" />
+    <Compile Include="Vehicles\Vehicle.cs" />
+    <Compile Include="Vehicles\Warship.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

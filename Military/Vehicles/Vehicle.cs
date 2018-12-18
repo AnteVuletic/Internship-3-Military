@@ -4,11 +4,11 @@
     {
         public static int Id { get; private set; }
         public int Weight { get; set; }
-        public int AvgSpeed { get; set; }
+        public double AvgSpeed { get; set; }
         public int FuelConsumption { get; set; }
         public int Capacity { get; set; }
 
-        protected Vehicle(int weight, int fuelConsumption, int capacity, int avgSpeed)
+        protected Vehicle(int weight, int fuelConsumption, int capacity, double avgSpeed)
         {
             Id++;
             Weight = weight;
