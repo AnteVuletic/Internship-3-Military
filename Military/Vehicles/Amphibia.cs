@@ -11,14 +11,14 @@ namespace Military.Vehicles
 
         public override string ToString()
         {
-            return base.ToString() + $"| {FuelConsumed()} L";
+            return "Amphibia: " +  base.ToString() + $"| {FuelConsumed()} L";
         }
 
         public void Move(int distance)
         {
             for (var tenKmIterator = 0; tenKmIterator < (distance/10); tenKmIterator++)
             {
-                if (HelperClasses.FuelConsumption.ThirtyPercentFailChance())
+                if (HelperClasses.Probability.ThirtyPercentFailChance())
                     distance += 5;
                 TripDistanceTraveled += 10;
             }
@@ -29,24 +29,24 @@ namespace Military.Vehicles
         {
             for (var tenMinuteIterator = 0; tenMinuteIterator < (distance / HelperClasses.FuelConsumption.TenMinuteDistanceTraveled(AvgSpeed)); tenMinuteIterator++)
             {
-                if (HelperClasses.FuelConsumption.FiftyPercentFailChance())
+                if (HelperClasses.Probability.FiftyPercentFailChance())
                     distance += 3;
                 TripDistanceTraveled += HelperClasses.FuelConsumption.TenMinuteDistanceTraveled(AvgSpeed);
             }
             TripDistanceTraveled += distance % HelperClasses.FuelConsumption.TenMinuteDistanceTraveled(AvgSpeed);
         }
-        public override double FuelConsumed()
+        public override int FuelConsumed()
         {
-            return (int)(TripDistanceTraveled * ((double)100 / HelperClasses.FuelConsumption.Amphibia));
+            return (int)(TripDistanceTraveled * (HelperClasses.FuelConsumption.Amphibia / 100.00));
         }
 
-        public void StartNewTrip(int distanceWater,int distanceLand,int numPassengers)
+        public override void StartNewTrip(int numPassengers,Distance distance)
         {
             TripDistanceTraveled = 0;
             for (var tripIterator = 0; tripIterator < GetNumberOfTrips(numPassengers); tripIterator++)
             {
-                Swim(distanceWater);
-                Move(distanceLand);
+                Swim(distance.DistanceGround);
+                Move(distance.DistanceWater);
             }
         }
 

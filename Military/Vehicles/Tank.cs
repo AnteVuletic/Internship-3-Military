@@ -9,27 +9,29 @@
         }
         public override string ToString()
         {
-            return base.ToString() + $"| {FuelConsumed()} L";
+            return "Tank: " + base.ToString() + $"| {FuelConsumed()} L";
         }
 
         public void Move(int distance)
         {
             for (var tenKmIterator = 0; tenKmIterator < (distance / 10); tenKmIterator++)
             {
-                if (HelperClasses.FuelConsumption.ThirtyPercentFailChance())
+                if (HelperClasses.Probability.ThirtyPercentFailChance())
                     distance += 5;
                 TripDistanceTraveled += 10;
             }
+
+            TripDistanceTraveled += distance % 10;
         }
-        public override double FuelConsumed()
+        public override int FuelConsumed()
         {
-            return (int)(TripDistanceTraveled * ((double)100 / HelperClasses.FuelConsumption.Tank));
+            return (int)(TripDistanceTraveled * (HelperClasses.FuelConsumption.Tank / 100.00));
         }
-        public void StartNewTrip(int distanceLand, int numPassengers)
+        public override void StartNewTrip(int numPassengers, Distance distance)
         {
             TripDistanceTraveled = 0;
             for (var tripIterator = 0; tripIterator < GetNumberOfTrips(numPassengers); tripIterator++)
-                Move(distanceLand);
+                Move(distance.DistanceTotal);
         }
     }
 }

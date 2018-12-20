@@ -8,17 +8,9 @@ namespace Military.Vehicles.HelperClasses
         public const int Amphibia = 70;
         public const int Warship = 200;
 
-        public static bool ThirtyPercentFailChance()
-        {
-            return new Random().Next(1, 100) <= 30;
-        }
-        public static bool FiftyPercentFailChance()
-        {
-            return new Random().Next(1, 100) <= 50;
-        }
         public static double TenMinuteDistanceTraveled(double avgSpeed)
         {
-            return (avgSpeed / 60) * 10;
+            return ((avgSpeed / 60) * 10);
         }
     }
 }

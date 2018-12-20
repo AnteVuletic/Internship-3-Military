@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading;
 
 namespace Military.Vehicles
 {
@@ -30,6 +32,8 @@ namespace Military.Vehicles
             return 2 * (numPassengers / Capacity) + 1;
         }
 
-        public abstract double FuelConsumed();
+
+        public abstract void StartNewTrip(int numPassengers,Distance distance);
+        public abstract int FuelConsumed();
     }
 }
